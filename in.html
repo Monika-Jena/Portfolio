@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monika's Portfolio</title>
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(270deg, #ff9966, #ff5e62, #00c6ff, #0072ff);
+            background-size: 800% 800%;
+            animation: bgAnimation 20s ease infinite;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        @keyframes bgAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        header {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 100px auto 40px;
+            max-width: 900px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-style: italic;
+            margin: 0;
+        }
+        #typing {
+            font-size: 1.3rem;
+            color: #ffeb3b;
+            margin-top: 10px;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.8rem;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #ffeb3b;
+        }
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                padding: 20px;
+                margin: 80px 20px 20px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            #typing {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <header id="home">
+        <h1>Hi, I'm Monika</h1>
+        <div id="typing"></div>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Information about your skills, experience, and background goes here.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <p>Details of your projects go here.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Contact form or details go here.</p>
+    </section>
+
+    <script>
+        const text = "Aspiring Automation Test Engineer | Hands-on in Embedded Systems & Intel Processor Testing\nSelenium | Python | QA | ISTQB-ready";
+        let i = 0;
+        function typeEffect() {
+            if (i < text.length) {
+                document.getElementById("typing").innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+                i++;
+                setTimeout(typeEffect, 50);
+            }
+        }
+        window.onload = typeEffect;
+    </script>
+</body>
+</html>
