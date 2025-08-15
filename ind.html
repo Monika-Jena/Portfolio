@@ -1,278 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monika's Portfolio</title>
-<style>
-    /* Background animation */
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(-45deg, #ff4081, #2196f3, #00c853, #ffeb3b);
-        background-size: 400% 400%;
-        animation: bgGradient 12s ease infinite;
-        color: white;
-        scroll-behavior: smooth;
-    }
-    @keyframes bgGradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Navbar */
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        padding: 10px 20px;
-        z-index: 1000;
-    }
-    nav h2 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-style: italic;
-    }
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-        margin: 0;
-        padding: 0;
-    }
-    nav ul li {
-        display: inline;
-    }
-    nav ul li a {
-        text-decoration: none;
-        color: white;
-        font-weight: 500;
-        transition: color 0.3s;
-    }
-    nav ul li a:hover {
-        color: #ffeb3b;
-    }
-
-    /* Mobile nav */
-    .menu-toggle {
-        display: none;
-        font-size: 1.8rem;
-        cursor: pointer;
-    }
-    @media (max-width: 768px) {
-        nav ul {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            background: rgba(0,0,0,0.8);
-            border-radius: 8px;
-            padding: 15px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monika's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        nav ul.show {
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(270deg, #6a11cb, #2575fc, #ff9966, #ff5e62);
+            background-size: 800% 800%;
+            animation: gradientAnimation 25s ease infinite, zoomAnimation 25s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes zoomAnimation {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
             display: flex;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            padding: 15px 0;
+            z-index: 10;
         }
-        .menu-toggle {
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        header {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 100px auto 40px;
+            max-width: 900px;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-style: italic;
+            margin: 0;
+        }
+        #typing {
+            font-size: 1.3rem;
+            color: #ffeb3b;
+            margin-top: 10px;
+            white-space: pre-line;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.8rem;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #ffeb3b;
+        }
+        /* CV Button */
+        .cv-btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            border: none;
+            background: #ff9800;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            animation: glow 1.5s infinite alternate;
+            text-decoration: none;
+            display: inline-block;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #ff9800; }
+            to { box-shadow: 0 0 20px #ff9800; }
+        }
+        .cv-btn:hover {
+            background: #e68900;
+        }
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #ffeb3b;
+        }
+        /* About Cards */
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .about-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .about-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .about-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ffeb3b;
+        }
+        .about-card p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        /* Skills Section */
+        .skills-container {
+            margin-top: 30px;
+        }
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        .skill-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .skill-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background: #ffeb3b;
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+            animation: fillBar 1s forwards;
+        }
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+        .skill-bar[data-level="90"] .skill-level { width: 90%; }
+        .skill-bar[data-level="85"] .skill-level { width: 85%; }
+        .skill-bar[data-level="80"] .skill-level { width: 80%; }
+        .skill-bar[data-level="75"] .skill-level { width: 75%; }
+        .skill-bar[data-level="60"] .skill-level { width: 60%; }
+        /* Projects Section Styles */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .project-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
             display: block;
         }
-    }
-
-    /* Hero section */
-    header {
-        height: 35vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 40px;
-        margin: 100px auto 40px;
-        max-width: 900px;
-        text-align: center;
-    }
-    header h1 {
-        font-size: 3rem;
-        font-style: italic;
-        margin: 0 0 15px;
-    }
-    #typing {
-        font-size: 1.4rem;
-        white-space: pre-line;
-    }
-    .cursor {
-        display: inline-block;
-        width: 3px;
-        background-color: white;
-        animation: blink 0.7s steps(1) infinite;
-        vertical-align: bottom;
-        margin-left: 3px;
-    }
-    @keyframes blink {
-        50% { background-color: transparent; }
-    }
-
-    /* Social links */
-    .social-links {
-        margin-top: 15px;
-        display: flex;
-        gap: 20px;
-    }
-    .social-links a {
-        color: white;
-        font-size: 1.8rem;
-        transition: transform 0.3s, color 0.3s;
-    }
-    .social-links a:hover {
-        transform: scale(1.2);
-        color: #ffeb3b;
-    }
-
-    /* Sections */
-    section {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-    }
-    section h2 {
-        margin-top: 0;
-        font-size: 2rem;
-    }
-
-    /* Responsive typography */
-    @media (max-width: 768px) {
-        header {
+        .project-details {
+            padding: 20px;
+        }
+        .project-details h3 {
+            margin-top: 0;
+            color: #ffeb3b;
+        }
+        .project-details p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #ddd;
+        }
+        .project-tech-stack {
+            margin: 15px 0;
+        }
+        .project-tech-stack span {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        /* Testimonials Section */
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 25px;
-            height: auto;
-            margin: 80px 20px 20px;
+            border-radius: 15px;
+            border-left: 5px solid #ff9800;
         }
-        header h1 {
-            font-size: 2.2rem;
-        }
-        #typing {
-            font-size: 1.1rem;
-        }
-        .social-links a {
-            font-size: 1.5rem;
-        }
-    }
-    @media (max-width: 480px) {
-        header h1 {
-            font-size: 1.8rem;
-        }
-        #typing {
+        .testimonial-card p {
+            font-style: italic;
             font-size: 1rem;
+            margin: 0 0 15px;
         }
-        .social-links a {
-            font-size: 1.3rem;
+        .testimonial-author {
+            text-align: right;
+            font-weight: bold;
+            color: #ffeb3b;
         }
-    }
-</style>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        /* Modal for Projects */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            margin: auto;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 80%;
+            color: white;
+            position: relative;
+        }
+        .close-btn {
+            color: #fff;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                padding: 20px;
+                margin: 80px 20px 20px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            #typing {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div id="particles-js"></div>
 
-<!-- Navbar -->
-<nav>
-    <h2>Monika</h2>
-    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
-    <ul id="menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-<!-- Hero Section -->
-<header id="home">
-    <h1><em>Hi, I'm Monika</em></h1>
-    <p id="typing"></p>
-    <div class="social-links">
-        <a href="https://www.linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
+    <header id="home">
+        <h1>Hi, I'm Monika</h1>
+        <div id="typing"></div>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/monika-j-70404217a" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Monika-Jena" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/monika___jena?igsh=NjBuY2x0OWFwdGNp" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <a href="Monika_CV.pdf" download class="cv-btn">Download CV</a>
+    </header>
+
+    <section id="about">
+        <h2>About Me – Summary</h2>
+        <div class="about-cards">
+            <div class="about-card">
+                <i class="fas fa-microchip"></i>
+                <p><strong>QA & Embedded Test Engineer</strong> – Hands-on in software testing, automation, validation</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-briefcase"></i>
+                <p><strong>Experience</strong> – Intel processor testing at Harman Connected Services</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-list-check"></i>
+                <p><strong>Skills</strong> – Manual & automated testing, test case design, white-box, interface, API testing</p>
+            </div>
+            <div class="about-card">
+                <i class="fab fa-python"></i>
+                <p><strong>Tools</strong> – Selenium, TestNG, Python, Power BI, CANoe</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-file-alt"></i>
+                <p><strong>Documentation</strong> – Test Plans, Traceability Matrices, Defect Reports, Validation Reports</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-bug"></i>
+                <p><strong>Strengths</strong> – Root cause analysis, debugging, QA standards, risk identification</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-network-wired"></i>
+                <p><strong>Domain Interests</strong> – Automotive, IoT, smart devices, embedded systems</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <h3>Python</h3>
+                <div class="skill-bar" data-level="90"><div class="skill-level"></div></div>
+            </div>
+            <div class="skill-item">
+                <h3>Selenium & TestNG</h3>
+                <div class="skill-bar" data-level="85"><div class="skill-level"></div></div>
+            </div>
+            <div class="skill-item">
+                <h3>CANoe</h3>
+                <div class="skill-bar" data-level="80"><div class="skill-level"></div></div>
+            </div>
+            <div class="skill-item">
+                <h3>Embedded Systems</h3>
+                <div class="skill-bar" data-level="75"><div class="skill-level"></div></div>
+            </div>
+            <div class="skill-item">
+                <h3>Power BI</h3>
+                <div class="skill-bar" data-level="60"><div class="skill-level"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="about-cards">
+            <div class="about-card">
+                <i class="fas fa-building"></i>
+                <p><strong>Harman Connected Services</strong> – Intel processor testing, software QA</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-laptop-code"></i>
+                <p><strong>Embedded Systems Projects</strong> – Automation and validation testing for IoT devices</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-certificate"></i>
+                <p><strong>Certifications</strong> – ISTQB, QA Automation</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-container">
+            <div class="project-card" data-project="project1">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400.png?text=Embedded+System+Project" alt="Image of Embedded System Project">
+                </div>
+                <div class="project-details">
+                    <h3>Embedded System Test Automation</h3>
+                    <p>Developed an automated test suite using **Python** and **CANoe** for an embedded system...</p>
+                </div>
+            </div>
+            <div class="project-card" data-project="project2">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400.png?text=Intel+Processor+Validation" alt="Image of Intel Processor Validation">
+                </div>
+                <div class="project-details">
+                    <h3>Intel Processor Validation Script</h3>
+                    <p>Created and maintained validation scripts for Intel processors at Harman Connected Services...</p>
+                </div>
+            </div>
+            </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p>"Monika is a highly dedicated and detail-oriented QA engineer. Her ability to quickly grasp complex embedded systems and write efficient test automation scripts was a huge asset to our team."</p>
+                <p class="testimonial-author">- John Doe, Project Manager at Harman</p>
+            </div>
+            <div class="testimonial-card">
+                <p>"Her contributions to our Intel processor validation project were invaluable. She is a proactive problem-solver with a deep understanding of quality assurance principles."</p>
+                <p class="testimonial-author">- Jane Smith, Senior Engineer</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="about-cards">
+            <div class="about-card">
+                <i class="fas fa-phone"></i>
+                <p><strong>Phone:</strong> +91 7205929992</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-envelope"></i>
+                <p><strong>Email:</strong> Monikajena395@gmail.com</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <p><strong>Location:</strong> Bandlaguda Jagir, Telangana, Pin Code 500086</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <img id="modalImage" src="" alt="Project Image" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+            <p id="modalDescription"></p>
+            <div id="modalTechStack"></div>
+            <a id="modalLink" href="#" target="_blank" class="project-link">View on GitHub</a>
+        </div>
     </div>
-</header>
 
-<!-- About Section -->
-<section id="about">
-    <h2>About Me</h2>
-    <p>I’m an aspiring Automation Test Engineer with experience in Embedded Systems and Intel Processor Testing.</p>
-</section>
-
-<!-- Skills Section -->
-<section id="skills">
-    <h2>Skills</h2>
-    <ul>
-        <li>Selenium</li>
-        <li>Python</li>
-        <li>QA Testing</li>
-        <li>Embedded Systems</li>
-    </ul>
-</section>
-
-<!-- Projects Section -->
-<section id="projects">
-    <h2>Projects</h2>
-    <p>Details about my key projects will be listed here.</p>
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: monika@example.com</p>
-</section>
-
-<script>
-    // Typing animation
-    const lines = [
-        "Aspiring Automation Test Engineer | Hands-on in Embedded Systems & Intel Processor Testing",
-        "Selenium | Python | QA | ISTQB-ready"
-    ];
-    let lineIndex = 0;
-    let charIndex = 0;
-    const typingElement = document.getElementById("typing");
-    const cursor = document.createElement("span");
-    cursor.classList.add("cursor");
-    typingElement.appendChild(cursor);
-
-    function type() {
-        if (charIndex < lines[lineIndex].length) {
-            typingElement.innerHTML = lines[lineIndex].substring(0, charIndex + 1) + cursor.outerHTML;
-            charIndex++;
-            setTimeout(type, 50);
-        } else {
-            setTimeout(() => {
-                if (lineIndex < lines.length - 1) {
-                    lineIndex++;
-                    charIndex = 0;
-                    typingElement.innerHTML += "\n";
-                    setTimeout(type, 300);
-                }
-            }, 500);
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        const text = "Aspiring Automation Test Engineer | Hands-on in Embedded Systems & Intel Processor Testing\nSelenium | Python | QA | ISTQB-ready";
+        let i = 0;
+        function typeEffect() {
+            if (i < text.length) {
+                document.getElementById("typing").innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+                i++;
+                setTimeout(typeEffect, 50);
+            }
         }
-    }
-    type();
+        window.onload = typeEffect;
 
-    // Mobile menu toggle
-    function toggleMenu() {
-        document.getElementById("menu").classList.toggle("show");
-    }
-</script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: {
+                    type: ["circle", "star", "polygon"], // Changed particle shapes here
+                    stroke: { width: 0, color: "#ffffff" },
+                    polygon: { nb_sides: 5 }
+                },
+                opacity: { value: 0.6 },
+                size: { value: 3 },
+                line_linked: { enable: true, distance: 100, color: "#ffffff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 5 }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                },
+                modes: {
+                    repulse: { distance: 100 },
+                    push: { particles_nb: 40 }
+                }
+            },
+            retina_detect: true
+        });
 
+        // Project Modal Logic
+        const modal = document.getElementById("projectModal");
+        const cards = document.querySelectorAll(".project-card");
+        const closeBtn = document.querySelector(".close-btn");
+
+        const projects = {
+            project1: {
+                title: "Embedded System Test Automation",
+                image: "https://via.placeholder.com/600x400.png?text=Embedded+System+Project",
+                description: "Developed a comprehensive automated test suite using Python and CANoe for an automotive embedded control unit. The scripts validated communication protocols and device functionality, leading to a 40% reduction in manual testing time and a significant decrease in bug detection cycle.",
+                techStack: ["Python", "CANoe", "Embedded C", "Hardware Integration", "Git"],
+                link: "https://github.com/Monika-Jena/embedded-automation-project"
+            },
+            project2: {
+                title: "Intel Processor Validation Script",
+                image: "https://via.placeholder.com/600x400.png?text=Intel+Processor+Validation",
+                description: "Worked as part of the Intel validation team at Harman Connected Services, creating and executing proprietary test scripts to ensure the stability and performance of new processor architectures. This involved white-box testing, root cause analysis, and collaboration with the design team.",
+                techStack: ["Proprietary Scripting", "Processor Testing", "Defect Tracking", "JIRA", "Confluence"],
+                link: "#" // No public link available for this project
+            }
+        };
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => {
+                const projectId = card.dataset.project;
+                const project = projects[projectId];
+                
+                document.getElementById("modalTitle").textContent = project.title;
+                document.getElementById("modalImage").src = project.image;
+                document.getElementById("modalDescription").textContent = project.description;
+                
+                const techStackDiv = document.getElementById("modalTechStack");
+                techStackDiv.innerHTML = "";
+                project.techStack.forEach(tech => {
+                    const span = document.createElement("span");
+                    span.textContent = tech;
+                    span.className = "project-tech-stack-item";
+                    techStackDiv.appendChild(span);
+                });
+
+                const projectLink = document.getElementById("modalLink");
+                if (project.link === "#") {
+                    projectLink.textContent = "Private Project";
+                    projectLink.href = "#";
+                    projectLink.classList.add("disabled-link");
+                } else {
+                    projectLink.textContent = "View on GitHub";
+                    projectLink.href = project.link;
+                    projectLink.classList.remove("disabled-link");
+                }
+                
+                modal.style.display = "flex";
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>

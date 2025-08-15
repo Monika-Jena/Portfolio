@@ -1,146 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monika's Portfolio</title>
-    <!-- Font Awesome for social icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(270deg, #ff9966, #ff5e62, #00c6ff, #0072ff);
-            background-size: 800% 800%;
-            animation: bgAnimation 20s ease infinite;
-            color: white;
-            scroll-behavior: smooth;
-        }
-        @keyframes bgAnimation {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(8px);
-            padding: 15px 0;
-            z-index: 1000;
-        }
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            color: #ffeb3b;
-        }
-        header {
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 100px auto 40px;
-            max-width: 900px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-style: italic;
-            margin: 0;
-        }
-        #typing {
-            font-size: 1.3rem;
-            color: #ffeb3b;
-            margin-top: 10px;
-        }
-        .social-icons {
-            margin-top: 20px;
-        }
-        .social-icons a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.8rem;
-            transition: color 0.3s;
-        }
-        .social-icons a:hover {
-            color: #ffeb3b;
-        }
-        section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-        @media (max-width: 768px) {
-            header {
-                height: auto;
-                padding: 20px;
-                margin: 80px 20px 20px;
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            #typing {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monika's Portfolio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        background: #111;
+    }
+    /* Particle Background */
+    #particles-js {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -1;
+        background: linear-gradient(270deg,#ff9966,#ff5e62,#00c6ff,#0072ff);
+        background-size: 800% 800%;
+        animation: bgAnimation 20s ease infinite;
+    }
+    @keyframes bgAnimation {
+        0% {background-position:0% 50%;}
+        50% {background-position:100% 50%;}
+        100% {background-position:0% 50%;}
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(8px);
+        padding: 15px 0;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(0,0,0,0.75); }
+    nav a {
+        color: white;
+        margin: 0 20px;
+        text-decoration: none;
+        font-weight: 600;
+        position: relative;
+        transition: 0.3s;
+    }
+    nav a::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #ffeb3b;
+        transition: 0.3s;
+    }
+    nav a:hover::after { width: 100%; }
+
+    /* Header */
+    header {
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 100px;
+        padding: 30px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(15px);
+        animation: fadeIn 2s ease forwards;
+    }
+    header h1 {
+        font-size: 3rem;
+        font-weight: 600;
+        font-style: italic;
+        margin: 0;
+        background: linear-gradient(90deg,#ffeb3b,#ff5722);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    #typing {
+        font-size: 1.3rem;
+        color: #ffeb3b;
+        margin-top: 15px;
+        white-space: pre-line;
+    }
+    .social-icons { margin-top: 20px; }
+    .social-icons a {
+        color: white;
+        margin: 0 12px;
+        font-size: 2rem;
+        transition: all 0.3s;
+    }
+    .social-icons a:hover { color: #ffeb3b; transform: scale(1.2); }
+
+    .cv-btn {
+        margin-top: 20px;
+        padding: 12px 28px;
+        border: none;
+        background: linear-gradient(90deg,#ff9800,#ff5722);
+        font-size: 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 0 15px #ff9800;
+        transition: 0.3s;
+    }
+    .cv-btn:hover { box-shadow: 0 0 25px #ffeb3b; transform: scale(1.05); }
+
+    section {
+        padding: 80px 20px;
+        max-width: 1000px;
+        margin: auto;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Cards */
+    .about-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+    .about-card {
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(12px);
+        padding: 25px;
+        border-radius: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, background 0.3s ease;
+        cursor: default;
+    }
+    .about-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255,255,255,0.15);
+    }
+    .about-card i { font-size: 2rem; margin-bottom: 10px; color: #ffeb3b; }
+    .about-card p { font-size: 1rem; line-height: 1.5; }
+
+    @media(max-width:768px){
+        header h1 { font-size: 2rem; }
+        #typing { font-size: 1rem; }
+    }
+
+    /* Animations */
+    @keyframes fadeIn { 0% {opacity:0;} 100% {opacity:1;} }
+
+</style>
 </head>
 <body>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<div id="particles-js"></div>
 
-    <header id="home">
-        <h1>Hi, I'm Monika</h1>
-        <div id="typing"></div>
-        <div class="social-icons">
-            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-    </header>
+<nav id="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Information about your skills, experience, and background goes here.</p>
-    </section>
+<header id="home">
+    <h1>Hi, I'm Monika</h1>
+    <div id="typing"></div>
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/monika-j-70404217a" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Monika-Jena" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/monika___jena?igsh=NjBuY2x0OWFwdGNp" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <a href="Monika_CV.pdf" download class="cv-btn">Download CV</a>
+</header>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>Details of your projects go here.</p>
-    </section>
+<section id="about">
+    <h2>About Me – Summary</h2>
+    <div class="about-cards">
+        <div class="about-card"><i class="fas fa-microchip"></i><p><strong>QA & Embedded Test Engineer</strong> – Hands-on in software testing, automation, validation</p></div>
+        <div class="about-card"><i class="fas fa-briefcase"></i><p><strong>Experience</strong> – Intel processor testing at Harman Connected Services</p></div>
+        <div class="about-card"><i class="fas fa-list-check"></i><p><strong>Skills</strong> – Manual & automated testing, test case design, white-box, interface, API testing</p></div>
+        <div class="about-card"><i class="fab fa-python"></i><p><strong>Tools</strong> – Selenium, TestNG, Python, Power BI, CANoe</p></div>
+        <div class="about-card"><i class="fas fa-file-alt"></i><p><strong>Documentation</strong> – Test Plans, Traceability Matrices, Defect Reports, Validation Reports</p></div>
+        <div class="about-card"><i class="fas fa-bug"></i><p><strong>Strengths</strong> – Root cause analysis, debugging, QA standards, risk identification</p></div>
+        <div class="about-card"><i class="fas fa-network-wired"></i><p><strong>Domain Interests</strong> – Automotive, IoT, smart devices, embedded systems</p></div>
+    </div>
+</section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Contact form or details go here.</p>
-    </section>
+<section id="experience">
+    <h2>Experience</h2>
+    <div class="about-cards">
+        <div class="about-card"><i class="fas fa-building"></i><p><strong>Harman Connected Services</strong> – Intel processor testing, software QA</p></div>
+        <div class="about-card"><i class="fas fa-laptop-code"></i><p><strong>Embedded Systems Projects</strong> – Automation and validation testing for IoT devices</p></div>
+        <div class="about-card"><i class="fas fa-certificate"></i><p><strong>Certifications</strong> – ISTQB, QA Automation</p></div>
+    </div>
+</section>
 
-    <script>
-        const text = "Aspiring Automation Test Engineer | Hands-on in Embedded Systems & Intel Processor Testing\nSelenium | Python | QA | ISTQB-ready";
-        let i = 0;
-        function typeEffect() {
-            if (i < text.length) {
-                document.getElementById("typing").innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-                i++;
-                setTimeout(typeEffect, 50);
-            }
+<section id="contact">
+    <h2>Contact</h2>
+    <div class="about-cards">
+        <div class="about-card"><i class="fas fa-phone"></i><p><strong>Phone:</strong> +91 7205929992</p></div>
+        <div class="about-card"><i class="fas fa-envelope"></i><p><strong>Email:</strong> Monikajena395@gmail.com</p></div>
+        <div class="about-card"><i class="fas fa-map-marker-alt"></i><p><strong>Location:</strong> Bandlaguda Jagir, Telangana, 500086</p></div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+    const text = "Aspiring Automation Test Engineer | Hands-on in Embedded Systems & Intel Processor Testing\nSelenium | Python | QA | ISTQB-ready";
+    let i=0;
+    function typeEffect() {
+        if(i<text.length){
+            document.getElementById("typing").innerHTML+=text.charAt(i)==="\n"? "<br>": text.charAt(i);
+            i++;
+            setTimeout(typeEffect,50);
         }
-        window.onload = typeEffect;
-    </script>
+    }
+    window.onload=typeEffect;
+
+    particlesJS("particles-js", {
+        particles: {
+            number:{value:80,density:{enable:true,value_area:800}},
+            color:{value:["#ffeb3b","#ff5722","#00c6ff"]},
+            shape:{type:"circle"},
+            opacity:{value:0.7},
+            size:{value:3},
+            line_linked:{enable:true,distance:150,color:"#fff",opacity:0.2,width:1},
+            move:{enable:true,speed:2}
+        },
+        interactivity:{
+            detect_on:"canvas",
+            events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"push"}},
+            modes:{repulse:{distance:100},push:{particles_nb:4}}
+        },
+        retina_detect:true
+    });
+
+    // Scroll animation for sections
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("visible");
+            }
+        });
+    },{threshold:0.1});
+    sections.forEach(section=>observer.observe(section));
+
+    // Navbar background on scroll
+    const navbar=document.getElementById("navbar");
+    window.addEventListener("scroll",()=>{ window.scrollY>50? navbar.classList.add("scrolled"):navbar.classList.remove("scrolled"); });
+</script>
 </body>
 </html>
