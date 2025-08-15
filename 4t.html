@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Background Demo</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-x: hidden;
+        font-family: Arial, sans-serif;
+        background: #0e0e0e;
+        color: white;
+    }
+    /* Particle container */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    /* Parallax layers */
+    .parallax-layer {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        pointer-events: none;
+        opacity: 0.1;
+    }
+    /* Example wave SVG */
+    .wave {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .wave svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    h1 {
+        position: relative;
+        text-align: center;
+        margin-top: 50px;
+        z-index: 2;
+        font-size: 3rem;
+        color: #ffeb3b;
+    }
+</style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<!-- Parallax layers -->
+<div class="parallax-layer" id="layer1" style="background-image: radial-gradient(circle, #ff5e62 10%, transparent 70%);"></div>
+<div class="parallax-layer" id="layer2" style="background-image: radial-gradient(circle, #ff9966 10%, transparent 70%);"></div>
+
+<h1>Animated Background Demo</h1>
+
+<!-- Animated SVG Wave -->
+<div class="wave">
+<svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+  <path d="M0,40 C300,80 900,0 1200,40 L1200,120 L0,120 Z" fill="#ffeb3b">
+    <animate 
+        attributeName="d" 
+        dur="8s" 
+        repeatCount="indefinite"
+        values="
+          M0,40 C300,80 900,0 1200,40 L1200,120 L0,120 Z;
+          M0,50 C400,0 800,120 1200,50 L1200,120 L0,120 Z;
+          M0,40 C300,80 900,0 1200,40 L1200,120 L0,120 Z
+        "
+    />
+  </path>
+</svg>
+</div>
+
+<!-- Include particles.js -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: ["#ff5e62","#ff9966","#ffeb3b","#ffffff"] },
+        shape: { type: ["circle","triangle","polygon"], polygon: { nb_sides: 6 } },
+        opacity: { value: 0.7, random: true },
+        size: { value: 4, random: true },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 1, random: true, out_mode: "out" }
+    },
+    interactivity: {
+        detect_on: "canvas",
+        events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+            grab: { distance: 150, line_linked: { opacity: 0.5 } },
+            push: { particles_nb: 4 }
+        }
+    },
+    retina_detect: true
+});
+
+// Parallax effect
+document.addEventListener("mousemove", function(e){
+    const layer1 = document.getElementById("layer1");
+    const layer2 = document.getElementById("layer2");
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    layer1.style.transform = `translate(${x*30}px, ${y*30}px)`;
+    layer2.style.transform = `translate(${x*60}px, ${y*60}px)`;
+});
+</script>
+
+</body>
+</html>
